@@ -9,9 +9,11 @@
 * mysql -uroot -p
 #### 5 - Criar um schema teste
 * create schema teste;
-#### 6 - Criando tabela no Mysql
+#### 6 - Alterar schema criado
+* use teste;
+#### 7 - Criando tabela no Mysql
 * CREATE TABLE tbl_user ( user_id BIGINT NOT NULL AUTO_INCREMENT, user_name VARCHAR(45) NULL, user_username VARCHAR(45) NULL, user_password VARCHAR(45) NULL, PRIMARY KEY (user_id));
-#### 7 - Verificar se a tabela foi criada 
+#### 8 - Verificar se a tabela foi criada 
 * show tables;
 
 #### Comandos útils
