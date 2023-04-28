@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, json
 from flaskext.mysql import MySQL
 
 mysql = MySQL()
@@ -28,6 +28,27 @@ def cadastro():
     cursor.execute('insert into tbl_user (user_name, user_username, user_password) VALUES (%s, %s, %s)', (nome, email, senha))
     conn.commit()
   return render_template('cadastro.html')
+
+@app.route('/list',methods=['POST','GET'])
+def listar():
+    try:
+            
+            conn = mysql.connect()
+            cursor = conn.cursor()
+            cursor.execute ('select user_name from tbl_user') 
+            data = cursor.fetchall()
+            print(data[0]);
+            for x in range(len(data)):
+                print(data[x])
+
+            conn.commit()
+            return render_template('cadastro.html', datas=data)
+
+    except Exception as e:
+        return json.dumps({'error':str(e)})
+    finally:
+        cursor.close() 
+        conn.close()
 
 
 
