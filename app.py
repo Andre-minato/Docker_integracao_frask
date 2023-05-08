@@ -25,7 +25,7 @@ def cadastro():
   if nome and email and senha:
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute('insert into tbl_user (user_name, user_username, user_password) VALUES (%s, %s, %s)', (nome, email, senha))
+    cursor.execute('insert into tbl_user (user_name, user_username) VALUES (%s, %s, %s)', (nome, email, senha))
     conn.commit()
   return render_template('cadastro.html')
 
@@ -35,14 +35,14 @@ def listar():
             
             conn = mysql.connect()
             cursor = conn.cursor()
-            cursor.execute ('select user_name from tbl_user') 
+            cursor.execute ('select user_name, user_username, user_password from tbl_user') 
             data = cursor.fetchall()
             print(data[0]);
             for x in range(len(data)):
                 print(data[x])
 
             conn.commit()
-            return render_template('cadastro.html', datas=data)
+            return render_template('lista.html', datas=data)
 
     except Exception as e:
         return json.dumps({'error':str(e)})
