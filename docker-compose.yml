@@ -16,5 +16,6 @@ services:
   image: mysql:5.7
   environment:
       MYSQL_ROOT_PASSWORD: mudar123
+      comand: banco_dados.py
   ports:
     - "3309:3309"
