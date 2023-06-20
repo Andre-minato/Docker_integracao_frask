@@ -16,5 +16,7 @@ services:
   image: mysql:5.7
   environment:
       MYSQL_ROOT_PASSWORD: mudar123
+  volumes:
+    - ./scripts:/docker-entrypoint-initdb.d
   ports:
     - "3309:3309"

@@ -4,5 +4,4 @@ RUN pip install flask-mysql
 RUN mkdir templates
 COPY templates/*  /templates/
 RUN chmod -R a+rwx templates
-CMD ["python", "banco_dados.py"]
 CMD ["python","app.py"]
