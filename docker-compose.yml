@@ -1,22 +1,33 @@
-
 version: "3.9"
-services:
- web:
-  build: .
-  working_dir: /data
-  command: python app.py
-  links:
-    - db
-  volumes:
-    - .:/data
-  ports:
-    - "5000:5000"
 
- db:
-  image: mysql:5.7
-  environment:
+services:
+  web:
+    build: .
+    working_dir: /data
+    command: python app.py
+    environment:
+      - MYSQL_DATABASE_HOST=db  # Configuração do banco no ambiente do container
+    depends_on:
+      - db  # Aguarda o banco de dados estar pronto antes de iniciar a aplicação
+    volumes:
+      - .:/data
+    ports:
+      - "5000:5000"
+
+  db:
+    image: mysql:5.7
+    container_name: mysql_container
+    restart: always  # Reinicia automaticamente em caso de falha
+    environment:
       MYSQL_ROOT_PASSWORD: mudar123
-  volumes:
-    - ./scripts:/docker-entrypoint-initdb.d
-  ports:
-    - "3309:3309"
+      MYSQL_DATABASE: teste
+      MYSQL_USER: user
+      MYSQL_PASSWORD: senha123
+    volumes:
+      - ./scripts:/docker-entrypoint-initdb.d
+      - db_data:/var/lib/mysql  # Persiste os dados do banco mesmo após reiniciar o container
+    ports:
+      - "3306:3306"
+
+volumes:
+  db_data:  # Volume para persistência do MySQL

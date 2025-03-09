@@ -1,14 +1,17 @@
-DROP DATABASE IF EXISTS `teste`;
+-- Removendo qualquer conexão ativa com o banco antes de excluí-lo
+DROP DATABASE IF EXISTS teste;
 
-CREATE DATABASE `teste`;
+-- Criando o banco de dados
+CREATE DATABASE IF NOT EXISTS teste;
 
-USE `teste`;
+-- Selecionando o banco de dados
+USE teste;
 
-
-CREATE TABLE `tbl_user`(
-      `id` BIGINT NOT NULL AUTO_INCREMENT,
-      `user_name` VARCHAR(45) NULL,
-      `user_username` VARCHAR(45) NULL,
-      `user_password` VARCHAR(45) NULL,
-      PRIMARY KEY (id)
+-- Criando a tabela de usuários
+CREATE TABLE IF NOT EXISTS tbl_user (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    user_name VARCHAR(45) NULL,
+    user_username VARCHAR(45) NULL,
+    user_password VARCHAR(45) NULL,
+    PRIMARY KEY (id)
 );
