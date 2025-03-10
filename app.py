@@ -6,17 +6,17 @@ mysql = MySQL()
 app = Flask(__name__)
 mysql.init_app(app)
 
-# MySQL configurations
+
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'mudar123'
 app.config['MYSQL_DATABASE_DB'] = 'teste'
-app.config['MYSQL_DATABASE_HOST'] = 'db'
+app.config['MYSQL_DATABASE_HOST'] = 'db' 
 mysql.init_app(app)
 
 
 @app.route('/')
 def home():
-    return render_template('index.html')  # Supondo que sua página inicial seja index.html
+    return render_template('index.html')  
 
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
@@ -44,12 +44,12 @@ def listar():
         cursor = conn.cursor()
         
         cursor.execute('SELECT id, user_name, user_username FROM tbl_user') 
-        data = cursor.fetchall()  # Obtém os dados
+        data = cursor.fetchall()  
         
         return render_template('lista.html', datas=data)
 
     except Exception as e:
-        return json.dumps({'error': str(e)}), 500  # Retorna erro com status 500
+        return json.dumps({'error': str(e)}), 500  
 
     finally:
         if cursor:
